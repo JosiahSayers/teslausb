@@ -692,10 +692,6 @@ function archive_clips () {
   /root/bin/disconnect-archive.sh
 }
 
-function send_loop_completion () {
-  /root/bin/send-push-message "$NOTIFICATION_TITLE:" "archive loop finished" || log "failed to send push message: archive loop finished"
-}
-
 function slowblink () {
   echo timer > "$STATUSLED/trigger" || return 0
   echo 900 > "$STATUSLED/delay_off"
@@ -881,8 +877,6 @@ then
 
   connect_usb_drives_to_host
 
-  send_loop_completion
-
   wait_for_archive_to_be_unreachable
 fi
 
@@ -913,8 +907,6 @@ do
   doubleblink
 
   connect_usb_drives_to_host
-
-  send_loop_completion
 
   wait_for_archive_to_be_unreachable
 
